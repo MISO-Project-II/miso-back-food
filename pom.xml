@@ -16,6 +16,14 @@
         <quarkus.platform.version>2.16.3.Final</quarkus.platform.version>
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.0.0-M7</surefire-plugin.version>
+
+        <sonar.coverage.jacoco.xmlReportPaths>../workspace/target/jacoco-report/jacoco.xml
+        </sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.exclusions>
+            src/main/java/edu/uniandes/miso/dto/**/*,
+            src/main/java/edu/uniandes/miso/entity/**/*,
+            src/main/java/edu/uniandes/miso/util/**/*
+        </sonar.exclusions>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -29,6 +37,17 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
+        <dependency>
+            <groupId>uk.co.jemos.podam</groupId>
+            <artifactId>podam</artifactId>
+            <version>7.2.11.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.dozermapper</groupId>
+            <artifactId>dozer-core</artifactId>
+            <version>6.5.2</version>
+        </dependency>
 
         <dependency>
             <groupId>org.apache.commons</groupId>

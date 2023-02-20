@@ -1,11 +1,8 @@
 package edu.uniandes.miso.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,12 +11,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@Table(name="food")
+@Table(name = "food")
 @Getter
 @Setter
 @ToString
@@ -31,8 +32,8 @@ public class Food {
     private BigDecimal calories;
     private String description;
     private Long idUbication;
-    @JsonIgnore
+
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    List<FoodType> listFoodType = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+	List<FoodType> listFoodType = new ArrayList<>();
 }

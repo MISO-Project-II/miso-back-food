@@ -15,4 +15,9 @@ public class ResponseService {
     private Boolean success;
     private Object result;
 
+    public ResponseService(String message, Boolean success, Object result) {
+        this.message = message;
+        this.success = success;
+        this.result = result;
+    }
 }
