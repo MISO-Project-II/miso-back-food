@@ -44,7 +44,7 @@ class FoodServiceTest {
 		food.setIdFood(1L);
 		foodType = factory.manufacturePojo(FoodType.class);
 		foodType.setIdFoodType(1L);
-		food.setListFoodType(Arrays.asList(foodType));
+		food.setFoodType(foodType);
 
 	}
 

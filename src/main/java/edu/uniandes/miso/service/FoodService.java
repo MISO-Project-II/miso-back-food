@@ -1,6 +1,5 @@
 package edu.uniandes.miso.service;
 
-import java.util.Arrays;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -15,6 +14,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.jboss.logging.Logger;
+
 import edu.uniandes.miso.dto.InputFood;
 import edu.uniandes.miso.dto.response.Reply;
 import edu.uniandes.miso.entity.Food;
@@ -27,6 +28,9 @@ import edu.uniandes.miso.util.ObjectMapper;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class FoodService {
+
+	@Inject
+	Logger log;
 
 	@Inject
 	FoodRepository repository;
@@ -83,23 +87,28 @@ public class FoodService {
 
 	@POST
 	public Response create(InputFood inputFood) {
-		return getResponse(inputFood);
+		Optional<FoodType> getFoodType = foodTypeRepository.findById(inputFood.getIdFoodType());
+		if (getFoodType.isPresent()) {
+			Food getFood = ObjectMapper.mappingObject(inputFood, Food.class);
+			getFood.setFoodType(getFoodType.get());
+			return Reply.ok(repository.save(getFood));
+		}
+		return Reply.notFound(null);
 	}
 
 	@PUT
 	@Path("{id}")
 	public Response update(@PathParam("id") Long idFood, InputFood inputFood) {
-		return getResponse(inputFood);
-	}
-
-	private Response getResponse(InputFood inputFood) {
-		if (foodTypeRepository.existsById(inputFood.getIdFoodType())) {
+		if (foodTypeRepository.existsById(inputFood.getIdFoodType()) && repository.existsById(idFood)) {
+			Optional<Food> food = repository.findById(idFood);
 			Optional<FoodType> getFoodType = foodTypeRepository.findById(inputFood.getIdFoodType());
 			Food getFood = ObjectMapper.mappingObject(inputFood, Food.class);
-			getFood.setListFoodType(Arrays.asList(getFoodType.get()));
-			repository.save(getFood);
-			return Reply.ok(getFood);
+			getFood.setIdFood(food.get().getIdFood());
+			getFood.setFoodType(getFoodType.get());
+			return Reply.ok(repository.save(getFood));
 		}
 		return Reply.notFound(null);
 	}
+
+
 }
