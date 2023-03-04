@@ -15,5 +15,5 @@ public class InputFood {
     private String nameFood;
     private BigDecimal calories;
     private String description;
-    private Long idUbication;
+    private String idUbication;
 }

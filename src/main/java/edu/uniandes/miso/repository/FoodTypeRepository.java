@@ -1,7 +1,8 @@
 package edu.uniandes.miso.repository;
 
-import edu.uniandes.miso.entity.FoodType;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface FoodTypeRepository extends JpaRepository<FoodType, Long> {
+import edu.uniandes.miso.entity.FoodType;
+
+public interface FoodTypeRepository extends CrudRepository<FoodType, Long> {
 }
