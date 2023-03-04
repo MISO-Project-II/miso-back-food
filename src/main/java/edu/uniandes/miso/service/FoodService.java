@@ -102,10 +102,12 @@ public class FoodService {
 		if (foodTypeRepository.existsById(inputFood.getIdFoodType()) && repository.existsById(idFood)) {
 			Optional<Food> food = repository.findById(idFood);
 			Optional<FoodType> getFoodType = foodTypeRepository.findById(inputFood.getIdFoodType());
-			Food getFood = ObjectMapper.mappingObject(inputFood, Food.class);
-			getFood.setIdFood(food.get().getIdFood());
-			getFood.setFoodType(getFoodType.get());
-			return Reply.ok(repository.save(getFood));
+			if(food.isPresent() && getFoodType.isPresent()){
+				Food getFood = ObjectMapper.mappingObject(inputFood, Food.class);
+				getFood.setIdFood(food.get().getIdFood());
+				getFood.setFoodType(getFoodType.get());
+				return Reply.ok(repository.save(getFood));
+			}
 		}
 		return Reply.notFound(null);
 	}
