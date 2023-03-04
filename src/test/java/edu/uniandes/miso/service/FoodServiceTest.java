@@ -90,7 +90,7 @@ class FoodServiceTest {
 		Mockito.when(foodTypeRepository.existsById(1L)).thenReturn(Boolean.TRUE);
 		Long id = 1L;
 		foodTypeRepository.deleteById(id);
-		Mockito.verify(foodTypeRepository, Mockito.times(1)).deleteById(Mockito.eq(1l));
+		Mockito.verify(foodTypeRepository, Mockito.times(1)).deleteById((1l));
 		Response response = foodService.deleteFoodType(1L);
 		assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
 	}
@@ -99,7 +99,7 @@ class FoodServiceTest {
 		Mockito.when(foodTypeRepository.existsById(1L)).thenReturn(Boolean.TRUE);
 		Long id = 1L;
 		foodTypeRepository.deleteById(id);
-		Mockito.verify(foodTypeRepository, Mockito.times(1)).deleteById(Mockito.eq(1l));
+		Mockito.verify(foodTypeRepository, Mockito.times(1)).deleteById(1l);
 		Response response = foodService.deleteFoodType(3L);
 		assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
 	}
@@ -119,7 +119,7 @@ class FoodServiceTest {
 		Mockito.when(foodRepository.existsById(1L)).thenReturn(Boolean.TRUE);
 		Long id = 1L;
 		foodRepository.deleteById(id);
-		Mockito.verify(foodRepository, Mockito.times(1)).deleteById(Mockito.eq(1L));
+		Mockito.verify(foodRepository, Mockito.times(1)).deleteById(1L);
 		Response response = foodService.deleteFoodType(1L);
 
 		assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
