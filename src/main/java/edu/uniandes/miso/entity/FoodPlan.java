@@ -31,7 +31,7 @@ public class FoodPlan {
     private String description;
     private String planType;
     @LazyCollection(LazyCollectionOption.FALSE)
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = { CascadeType.PERSIST})
     @JoinTable(
             name = "foodplan_food_routine",
             joinColumns = @JoinColumn(name = "idFoodPlan"),
