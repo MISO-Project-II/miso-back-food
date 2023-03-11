@@ -29,7 +29,8 @@ public class FoodPlan {
     private Long idFoodPlan;
     private String name;
     private String description;
-    private String planType;
+    private String contractType;
+    private String eventType;
     @LazyCollection(LazyCollectionOption.FALSE)
     @ManyToMany(cascade = { CascadeType.PERSIST})
     @JoinTable(
